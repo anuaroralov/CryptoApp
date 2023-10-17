@@ -1,7 +1,8 @@
-package com.anuar.cryptocurrencyapp
+package com.anuar.cryptocurrencyapp.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.anuar.cryptocurrencyapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
