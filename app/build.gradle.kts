@@ -65,4 +65,9 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
 
     implementation("androidx.work:work-runtime-ktx:2.8.1")
+
+    implementation("androidx.slidingpanelayout:slidingpanelayout:1.2.0")
+
+    implementation("com.google.dagger:dagger:2.48.1")
+    kapt ("com.google.dagger:dagger-compiler:2.48.1")
 }

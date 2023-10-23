@@ -1,5 +1,6 @@
 package com.anuar.cryptocurrencyapp.presentation
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,15 +10,28 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.anuar.cryptocurrencyapp.databinding.FragmentCoinPriceListBinding
 import com.example.cryptoapp.domain.CoinInfo
+import javax.inject.Inject
 
 
 class CoinPriceListFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: MyViewModel
 
     private var _binding: FragmentCoinPriceListBinding? = null
     private val binding: FragmentCoinPriceListBinding
         get() = _binding ?: throw RuntimeException("FragmentCoinDetailBinding is null")
+
+    private val component by lazy {
+        (requireActivity().application as MyApplication).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +55,7 @@ class CoinPriceListFragment : Fragment() {
         }
         binding.rvCoinPriceList.adapter = adapter
         binding.rvCoinPriceList.itemAnimator = null
-        viewModel = ViewModelProvider(this)[MyViewModel::class.java]
+        viewModel = ViewModelProvider(this,viewModelFactory)[MyViewModel::class.java]
         viewModel.coinInfoList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
